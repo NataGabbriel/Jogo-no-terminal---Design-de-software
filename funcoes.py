@@ -1,7 +1,6 @@
 from random import choice
 import math
 
-print("TESTE")
 
 def normaliza(dicio):
     dicio_saida = {}
