@@ -1,2 +1,12 @@
-print('Olá, Doisberto.')
-print('Trabalho sério agora !!')
+import ast
+import random
+import funcoes
+
+
+with open('base_dados.txt', 'r') as arquivo:
+    base_dados = arquivo.read()
+
+dicionario = ast.literal_eval(base_dados)
+dicio_norma = funcoes.normaliza(dicionario)
+
+repost = 's'
