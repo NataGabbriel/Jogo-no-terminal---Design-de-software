@@ -19,6 +19,15 @@ while repost != "s":
    
     n_tent = 20
         
+    #Variáveis importantes para o desenvolvimento da dica
+    dicas_validas = ["0","1","2","3","4","5"]
+    lista_paises = []
+    lista_dicas = []
+
+        #Variáveis importantes para o desenvolvimento das distâncias
+    distancias = []
+    paises_palpites = []
+
     print("=================================================")
     print("          Bem vindo ao Jogo dos países         ")
     print("        Desafio: Acertar o país sorteado       ")
@@ -45,24 +54,33 @@ while repost != "s":
         
         
         
+
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        if palpite not in dicio_norma.keys() and palpite != "dicas" or palpite == "inventario" or palpite in lista_paises:
+        
+            if palpite in lista_paises:
+                print("Esse país já foi escolhido. Tente outro!")
+            elif palpite == "inventario":
+                
+                print("")
+                print ("Distâncias: ")
+                
+                for dist in distancias:
+                    print (f"{dist[1] : .3f}km ------> {dist[0]} ")
+                
+                print("")
+                print("Dicas:")
+                
+                for di in lista_dicas:
+                    print(di)
+                print("")
+
+            elif palpite == "desisto":
+                n_tent = n_tent - n_tent
+
+            else:
+                print("Pais desconhecido!")    
     
     
     repost = input('Você deseja jogar de novo(s/n):')    
