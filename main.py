@@ -32,6 +32,16 @@ while repost != "s":
     while n_tent > 0:
         print("Você tem {} tentativas!".format(n_tent))
         palpite = (str(input("Qual o palpite? "))).lower()
+                
+        
+        
+        if palpite == pais_sorteado:
+            if n_tent == 20:
+                print("Parabéns!!! Você acertou de primeira!!!")
+                n_tent = 0
+            else:
+                print("Parabéns! Você acertou depois de {} tentativas".format(20 - n_tent))
+                n_tent = 0
         
         
         
