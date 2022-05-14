@@ -17,6 +17,7 @@ while repost != "s":
     pais_sorteado = funcoes.sorteia_pais(dicio_norma)
     info_pais_sorteado = dicio_norma[pais_sorteado]
    
+    n_tent = 20
         
     print("=================================================")
     print("          Bem vindo ao Jogo dos países         ")
@@ -28,10 +29,32 @@ while repost != "s":
     print(" inventario - exibe a posição")
     print("Um país foi sorteado, ADIVINHE!")    
         
+    while n_tent > 0:
+        print("Você tem {} tentativas!".format(n_tent))
+        palpite = (str(input("Qual o palpite? "))).lower()
         
         
         
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     repost = input('Você deseja jogar de novo(s/n):')    
     while repost != "s":    
         if repost != "n":
