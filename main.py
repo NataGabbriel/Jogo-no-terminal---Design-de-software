@@ -14,18 +14,28 @@ repost = 's'
 
 while repost != "s":
         
+    pais_sorteado = funcoes.sorteia_pais(dicio_norma)
+    info_pais_sorteado = dicio_norma[pais_sorteado]
+   
+        
+    print("=================================================")
+    print("          Bem vindo ao Jogo dos países         ")
+    print("        Desafio: Acertar o país sorteado       ")
+    print("=================================================")
+    print("Comandos:")
+    print(" dicas - entre no mercado de dicas")
+    print(" desisto - desiste dessa rodada")
+    print(" inventario - exibe a posição")
+    print("Um país foi sorteado, ADIVINHE!")    
         
         
         
         
         
-        
-        
-        
-        
-        
+    repost = input('Você deseja jogar de novo(s/n):')    
+    while repost != "s":    
         if repost != "n":
-        
+            
             repost = input('Caractere Inválido! Você deseja jogar de novo(s/n):')
         else:
             break
