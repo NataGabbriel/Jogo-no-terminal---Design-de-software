@@ -12,7 +12,7 @@ dicio_norma = funcoes.normaliza(dicionario)
 repost = 's'
 
 
-while repost != "s":
+while repost == "s":
         
     pais_sorteado = funcoes.sorteia_pais(dicio_norma)
     info_pais_sorteado = dicio_norma[pais_sorteado]
