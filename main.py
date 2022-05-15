@@ -167,6 +167,49 @@ while repost == "s":
                 
                 n_tent = n_tent - 6
 
+            elif l_dica[indice] == dica3:
+                pop = info_pais_sorteado["populacao"] 
+                
+                d3 = (f" A população do país sorteado é de {pop} habitantes!")
+                print(d3)
+                lista_dicas.append(d3)
+                
+                n_tent = n_tent - 5
+            
+
+
+
+            elif l_dica[indice] == dica4:
+                
+                d4 = ("O continente do país sorteado é : {}".format(info_pais_sorteado["continente"]))
+                print(d4)
+                lista_dicas.append(d4)
+                
+                
+                n_tent = n_tent - 9
+
+
+            elif l_dica[indice] == dica5:
+                
+                d5 = (f'A área do país sorteado é de {info_pais_sorteado["area"]} km quadrados!')
+                print(d5)
+                lista_dicas.append(d5)
+                
+                n_tent = n_tent - 6
+                
+            
+
+            if palpite != "dicas":
+                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
+                del l_dica[indice]
+                
+                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
+                del dicas_validas[-1]
+                
+                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
+                del preco_dica[indice]
+
+
     repost = input('Você deseja jogar de novo(s/n):')    
     while repost != "s":    
         if repost != "n":
