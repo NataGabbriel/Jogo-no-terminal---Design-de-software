@@ -1,3 +1,4 @@
+
 import ast
 import random
 import funcoes
@@ -11,27 +12,32 @@ dicio_norma = funcoes.normaliza(dicionario)
 
 repost = 's'
 
-
-while repost == "s":
-        
+while repost == 's':
     pais_sorteado = funcoes.sorteia_pais(dicio_norma)
     info_pais_sorteado = dicio_norma[pais_sorteado]
-   
+
+    print(pais_sorteado)
+    print(info_pais_sorteado)
+
     n_tent = 20
-        
+
     #Variáveis importantes para o desenvolvimento da dica
-    dica1 = ("Cor da Bandeira  - custa 4 tentativas")
+    dica1 = ("Cor da Bandeira  - custa 4 tentativas")       # daqui (natã)
     dica2 = ("Letra da capital - custa 6 tentativas")
     dica3 = ("População        - custa 5 tentativas")
     dica4 = ("Continente       - custa 9 tentativas")
     dica5 = ("Área             - custa 6 tentativas")
     l_dica = [dica1, dica2, dica3, dica4, dica5]
-    preco_dica = [4, 6, 5, 9, 6]
+    preco_dica = [4, 6, 5, 9, 6]                             # até aqui (natã)
     dicas_validas = ["0","1","2","3","4","5"]
     lista_paises = []
     lista_dicas = []
+    lista_l_sorteada = []
+    l_cores_sorteadas = []
+    lista_distancias = []
+    
 
-        #Variáveis importantes para o desenvolvimento das distâncias
+    #Variáveis importantes para o desenvolvimento das distâncias
     distancias = []
     paises_palpites = []
 
@@ -43,8 +49,7 @@ while repost == "s":
     print(" dicas - entre no mercado de dicas")
     print(" desisto - desiste dessa rodada")
     print(" inventario - exibe a posição")
-    print("Um país foi sorteado, ADIVINHE!")    
-        
+    print("Um país foi sorteado, ADIVINHE!")
     while n_tent > 0:
         print("Você tem {} tentativas!".format(n_tent))
         palpite = (str(input("Qual o palpite? "))).lower()
@@ -58,13 +63,11 @@ while repost == "s":
             else:
                 print("Parabéns! Você acertou depois de {} tentativas".format(20 - n_tent))
                 n_tent = 0
-        
-        
-        
 
-    
-    
-        if palpite not in dicio_norma.keys() and palpite != "dicas" or palpite == "inventario" or palpite in lista_paises:
+
+        
+        
+        if palpite not in dicio_norma.keys() and palpite != "dicas" or palpite == "inventario" or funcoes.esta_na_lista(palpite, lista_paises) == True:
         
             if palpite in lista_paises:
                 print("Esse país já foi escolhido. Tente outro!")
@@ -74,11 +77,25 @@ while repost == "s":
                 print ("Distâncias: ")
                 
                 for dist in distancias:
-                    print (f"{dist[1] : .3f}km ------> {dist[0]} ")
                 
-                print("")
-                print("Dicas:")
-                
+                    if dist[1] < 1000:
+                        operador2 = (('\033[32m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                    
+                        print(operador2)    
+                        
+                    elif dist[1] < 5000 and dist[1] > 1000:
+                        operador2 = (("\033[31m"+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                        print(operador2)     
+
+                    elif dist[1] > 5000 and dist[1] < 10000:
+                        operador2 = (('\033[35m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))      
+                        print(operador2)
+                    
+                    elif dist[1] > 10000:
+                        operador2 = (('\033[30m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                        print(operador2)
+
+                print("Dicas: ")    
                 for di in lista_dicas:
                     print(di)
                 print("")
@@ -87,10 +104,11 @@ while repost == "s":
                 n_tent = n_tent - n_tent
 
             else:
-                print("Pais desconhecido!")    
-    
+                print("Pais desconhecido!")
 
-        while palpite == "dicas" or palpite == 'dica':
+        
+
+        while palpite == "dicas" or palpite == 'dica': # daqui (natã)
             
             if n_tent - min(preco_dica) < 1:
                 print("Você não tem saldo o suficiente!")
@@ -108,9 +126,7 @@ while repost == "s":
                 if n_tent - preco_dica[cont] >= 1:
                     print("{}. {}".format(cont+1, l_dica[cont]))
                     opcoes_dicas = opcoes_dicas + ("| ") + str(cont+1)
-                else:
-                    del preco_dica[cont]
-                    del dicas_validas[cont]
+                
                     
                 
                 
@@ -142,12 +158,13 @@ while repost == "s":
                     c.append(x)
                 
                 selec = "outras"
-                while selec == "outras" or info_pais_sorteado["bandeira"][selec] == 0:
+                while selec == "outras" or info_pais_sorteado["bandeira"][selec] == 0 or funcoes.esta_na_lista(selec, l_cores_sorteadas) == True:
                     selec = random.choice(c)
                 
                 d1 = (f"Cor da bandeira: {selec}")
                 print(d1)
                 lista_dicas.append(d1)
+                l_cores_sorteadas = []
 
                 n_tent = n_tent - 4
                 
@@ -157,17 +174,22 @@ while repost == "s":
             elif l_dica[indice] == dica2:
                 
                 info_cap = info_pais_sorteado["capital"]
-                c = []
-                for x in info_cap:
-                    c.append(x)
+                
 
-                d2 = (f"Letra da própria capital: {random.choice(c)}")
+                letra_sorteada = funcoes.sorteia_letra(info_cap, lista_l_sorteada)
+                
+
+                d2 = (f"Letra da capital do país: {letra_sorteada}")
                 print(d2)
                 lista_dicas.append(d2)
+                lista_l_sorteada.append(letra_sorteada)
                 
-                n_tent = n_tent - 6
+                n_tent = n_tent - 6    # até aqui (natã)
+            
 
-            elif l_dica[indice] == dica3:
+
+
+            elif l_dica[indice] == dica3:       # João amanhã
                 pop = info_pais_sorteado["populacao"] 
                 
                 d3 = (f" A população do país sorteado é de {pop} habitantes!")
@@ -195,23 +217,26 @@ while repost == "s":
                 print(d5)
                 lista_dicas.append(d5)
                 
-                n_tent = n_tent - 6
+                n_tent = n_tent - 6      
                 
             
 
             if palpite != "dicas":
-                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
-                del l_dica[indice]
                 
-                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
-                del dicas_validas[-1]
                 
-                #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
-                del preco_dica[indice]
+                if l_dica[indice] != dica1 and l_dica[indice] != dica2:
+                    del dicas_validas[-1]
+                
+                if l_dica[indice] != dica1 and l_dica[indice] != dica2:    
+                    del preco_dica[indice]
 
+                if l_dica[indice] != dica1 and l_dica[indice] != dica2:
+                    del l_dica[indice]
                 
+
+            # até aqui
             
-        if palpite != pais_sorteado and palpite  in dicio_norma.keys() and palpite not in lista_paises:
+        if palpite != pais_sorteado and palpite  in dicio_norma.keys() and funcoes.esta_na_lista(palpite, distancias) == False and palpite != 'inventario':
             raio = 6371
             
             lati_sorteado = dicio_norma[pais_sorteado]['geo']['latitude']
@@ -229,11 +254,11 @@ while repost == "s":
             distancia_haversine = funcoes.haversine(raio, lati_sorteado, longi_sorteado, lati_palpite, longi_palpite)
             
             
-            lista_paises.append(palpite)
             
-            lista_entrada = distancias
-            distancias = funcoes.adiciona_em_ordem(palpite, distancia_haversine, lista_entrada) 
+            
+            distancias = funcoes.adiciona_em_ordem(palpite, distancia_haversine, distancias) 
 
+            
             print("")
             print("")
             print("Ainda não...veja a distância desse país para o país sorteado!")
@@ -241,14 +266,33 @@ while repost == "s":
             print ("Distâncias: ")
             n_tent = n_tent - 1
             for dist in distancias:
-                print (f"{dist[1] : .3f}km ------> {dist[0]} ")
-    
+                
+                if dist[1] < 1000:
+                    operador2 = (('\033[32m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                
+                    print(operador2)    
+                    
+                elif dist[1] < 5000 and dist[1] > 1000:
+                    operador2 = (("\033[31m"+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                    print(operador2)     
 
+                elif dist[1] > 5000 and dist[1] < 10000:
+                    operador2 = (('\033[35m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))      
+                    print(operador2)
+                
+                elif dist[1] > 10000:
+                    operador2 = (('\033[30m'+f"{dist[1] : .0f}km ------> {dist[0]}"+"\033[0;0m"))
+                    print(operador2)
+                                
+
+        if n_tent == 0 and palpite != pais_sorteado :
+            print("Você perdeu!")
+            print(f'O país sorteado era:{pais_sorteado}')
+    repost = input('Você deseja jogar de novo(s/n):')
     
-    repost = input('Você deseja jogar de novo(s/n):')    
-    while repost != "s":    
+    while repost != "s":
         if repost != "n":
-            
+        
             repost = input('Caractere Inválido! Você deseja jogar de novo(s/n):')
         else:
             break
