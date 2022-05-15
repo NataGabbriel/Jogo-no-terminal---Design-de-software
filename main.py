@@ -21,13 +21,13 @@ while repost == 's':
     n_tent = 20
 
     #Variáveis importantes para o desenvolvimento da dica
-    dica1 = ("Cor da Bandeira  - custa 4 tentativas")       # daqui (natã)
+    dica1 = ("Cor da Bandeira  - custa 4 tentativas")       
     dica2 = ("Letra da capital - custa 6 tentativas")
     dica3 = ("População        - custa 5 tentativas")
     dica4 = ("Continente       - custa 9 tentativas")
     dica5 = ("Área             - custa 6 tentativas")
     l_dica = [dica1, dica2, dica3, dica4, dica5]
-    preco_dica = [4, 6, 5, 9, 6]                             # até aqui (natã)
+    preco_dica = [4, 6, 5, 9, 6]                             
     dicas_validas = ["0","1","2","3","4","5"]
     lista_paises = []
     lista_dicas = []
@@ -183,12 +183,12 @@ while repost == 's':
                 lista_dicas.append(d2)
                 lista_l_sorteada.append(letra_sorteada)
                 
-                n_tent = n_tent - 6    # até aqui (natã)
+                n_tent = n_tent - 6    
             
 
 
 
-            elif l_dica[indice] == dica3:       # João amanhã
+            elif l_dica[indice] == dica3:       
                 pop = info_pais_sorteado["populacao"] 
                 
                 d3 = (f" A população do país sorteado é de {pop} habitantes!")
