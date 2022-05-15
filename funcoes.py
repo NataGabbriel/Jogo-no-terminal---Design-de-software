@@ -39,20 +39,33 @@ def haversine(r, la1 , lo1, la2, lo2):
 
 
 
-def adiciona_em_ordem(nome,distancia,lista):
-    nome_distancia = [nome, distancia]
+def adiciona_em_ordem(pais, distancia, lista):
+    new_lista = []
+    cont = 0
+    
     if len(lista) == 0:
-        lista.append(nome_distancia)
-    for i in lista:
-        if distancia < i[1] and nome_distancia not in lista:
-            lista.insert(lista.index(i),nome_distancia)
+        return [[pais, distancia]]
+        
+    for x in lista:
+        if x[1] < distancia:
+            new_lista.append(x)
+            if cont == len(lista)-1:
+                new_lista.append([pais, distancia])
+                
+        elif x[1] > distancia:
+            new_lista.append([pais, distancia])
+            for x in lista[cont:]:
+                new_lista.append(x)
+            
+            break
+        cont += 1
+    
+    return new_lista
 
-    return lista
 
 
 
-
-def esta_na_lista(nome,lista):
+def esta_na_lista(nome, lista):
     for j in lista:
         if j[0] == nome:
             return True
