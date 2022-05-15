@@ -209,7 +209,42 @@ while repost == "s":
                 #if l_dica[indice] != dica1 and l_dica[indice] != dica2:
                 del preco_dica[indice]
 
+                
+            
+        if palpite != pais_sorteado and palpite  in dicio_norma.keys() and palpite not in lista_paises:
+            raio = 6371
+            
+            lati_sorteado = dicio_norma[pais_sorteado]['geo']['latitude']
+            
+            
+            longi_sorteado = dicio_norma[pais_sorteado]['geo']['longitude']
+            
+            
+            lati_palpite = dicio_norma[palpite]['geo']['latitude']
+            
 
+            longi_palpite = dicio_norma[palpite]['geo']['longitude']
+            
+
+            distancia_haversine = funcoes.haversine(raio, lati_sorteado, longi_sorteado, lati_palpite, longi_palpite)
+            
+            
+            lista_paises.append(palpite)
+            
+            lista_entrada = distancias
+            distancias = funcoes.adiciona_em_ordem(palpite, distancia_haversine, lista_entrada) 
+
+            print("")
+            print("")
+            print("Ainda não...veja a distância desse país para o país sorteado!")
+            print("")
+            print ("Distâncias: ")
+            n_tent = n_tent - 1
+            for dist in distancias:
+                print (f"{dist[1] : .3f}km ------> {dist[0]} ")
+    
+
+    
     repost = input('Você deseja jogar de novo(s/n):')    
     while repost != "s":    
         if repost != "n":
