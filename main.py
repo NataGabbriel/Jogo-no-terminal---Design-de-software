@@ -20,6 +20,13 @@ while repost != "s":
     n_tent = 20
         
     #Variáveis importantes para o desenvolvimento da dica
+    dica1 = ("Cor da Bandeira  - custa 4 tentativas")
+    dica2 = ("Letra da capital - custa 6 tentativas")
+    dica3 = ("População        - custa 5 tentativas")
+    dica4 = ("Continente       - custa 9 tentativas")
+    dica5 = ("Área             - custa 6 tentativas")
+    l_dica = [dica1, dica2, dica3, dica4, dica5]
+    preco_dica = [4, 6, 5, 9, 6]
     dicas_validas = ["0","1","2","3","4","5"]
     lista_paises = []
     lista_dicas = []
@@ -82,7 +89,84 @@ while repost != "s":
             else:
                 print("Pais desconhecido!")    
     
-    
+
+        while palpite == "dicas" or palpite == 'dica':
+            
+            if n_tent - min(preco_dica) < 1:
+                print("Você não tem saldo o suficiente!")
+                break
+            
+            palpite = "nondicas"
+            print("----------------------------------------")
+            print("             Mercado de dicas:          ")
+            print("----------------------------------------")
+            cont = 0
+            opcoes_dicas = ("0")
+            while cont < len(preco_dica):
+                
+
+                if n_tent - preco_dica[cont] >= 1:
+                    print("{}. {}".format(cont+1, l_dica[cont]))
+                    opcoes_dicas = opcoes_dicas + ("| ") + str(cont+1)
+                else:
+                    del preco_dica[cont]
+                    del dicas_validas[cont]
+                    
+                
+                
+                
+                cont += 1
+            print("0. Sem dica         - cafézinho gratis ;)")
+            escolha_dica = input("Escolha sua opção [{}]: ".format(opcoes_dicas))
+            
+            while escolha_dica not in dicas_validas:
+                print("Caractere Inválido!")
+                escolha_dica = input("Escolha sua opção [{}]: ".format(opcoes_dicas))
+
+            
+            indice = int(escolha_dica)-1
+            
+
+            
+            
+            if escolha_dica == "0":
+                
+                break
+                
+            
+            elif l_dica[indice] == dica1:
+                
+                info_band = info_pais_sorteado["bandeira"]
+                c = []
+                for x in info_band.keys():
+                    c.append(x)
+                
+                selec = "outras"
+                while selec == "outras" or info_pais_sorteado["bandeira"][selec] == 0:
+                    selec = random.choice(c)
+                
+                d1 = (f"Cor da bandeira: {selec}")
+                print(d1)
+                lista_dicas.append(d1)
+
+                n_tent = n_tent - 4
+                
+            
+            
+            
+            elif l_dica[indice] == dica2:
+                
+                info_cap = info_pais_sorteado["capital"]
+                c = []
+                for x in info_cap:
+                    c.append(x)
+
+                d2 = (f"Letra da própria capital: {random.choice(c)}")
+                print(d2)
+                lista_dicas.append(d2)
+                
+                n_tent = n_tent - 6
+
     repost = input('Você deseja jogar de novo(s/n):')    
     while repost != "s":    
         if repost != "n":
