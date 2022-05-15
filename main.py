@@ -16,9 +16,6 @@ while repost == 's':
     pais_sorteado = funcoes.sorteia_pais(dicio_norma)
     info_pais_sorteado = dicio_norma[pais_sorteado]
 
-    print(pais_sorteado)
-    print(info_pais_sorteado)
-
     n_tent = 20
 
     #Variáveis importantes para o desenvolvimento da dica
